@@ -1,0 +1,22 @@
+{
+  "verified_at": "2026-06-04",
+  "method": "smooth_task server-side browser extraction",
+  "live_url": "https://app.oneleet.com/tenants/553deae1-f34c-4e47-92a6-c8bc9aa236a4/risk-management/assessments/dbad09db-e09e-45ac-8615-a554d7ffc224",
+  "login_wall": false,
+  "page_title": "April 2026 Risk Assessment",
+  "summary": {
+    "All risks": 53,
+    "Needs assessment": 25,
+    "Accepted": 0,
+    "Avoided": 0,
+    "Mitigated": 0,
+    "Transferred": 0
+  },
+  "export_files_reported_by_browser": [
+    "/cache/.browser/downloads/risks.csv"
+  ],
+  "active_rows_collected": 25,
+  "archived_rows_collected": 28,
+  "library_rows_collected": 78,
+  "note": "The browser task returned the same active and archived row counts represented in source_data/oneleet_risks.json. Library rows are captured as candidate source risks, not current assessment rows."
+}
