@@ -1,0 +1,1193 @@
+{
+  "assessment": {
+    "name": "April 2026 Risk Assessment",
+    "risk_count": 53,
+    "needs_assessment_count": 25,
+    "extraction_note": "Verified by smooth_task on 2026-06-04: the assessment page showed All risks=53 and Needs assessment=25; the Export button downloaded risks.csv; the assessment active view produced 25 needs-assessment rows; the archived view produced 28 archived rows. Risk Library rows are retained as Library only when they are not present in the active or archived assessment views."
+  },
+  "active_needs_assessment": [
+    {
+      "id": "62",
+      "name": "Breach of stored customer credentials enables account takeovers and attacks on connected systems",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "66",
+      "name": "Cloud infrastructure misconfiguration exposes sensitive data",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "70",
+      "name": "Company data is exposed through lost or stolen mobile devices",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "74",
+      "name": "Compromised identity verification data undermines customer authentication",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "78",
+      "name": "Confidential customer data is publicly released or exploited from a data breach",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "82",
+      "name": "Credentials or API keys are accidentally exposed in public repositories",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "86",
+      "name": "Critical system has single point of failure without redundancy",
+      "category": "Operational",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "90",
+      "name": "Critical vulnerability in public-facing APIs is exploited",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "94",
+      "name": "Database security rules misconfiguration exposes data publicly",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "98",
+      "name": "Employee accounts are compromised through phishing or social engineering",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "102",
+      "name": "Growth without security oversight erodes least-privilege controls and expands attack surface",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "106",
+      "name": "Inability to locate or delete personal data prevents fulfilling data subject requests",
+      "category": "Legal & Compliance",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "110",
+      "name": "Inadequate access controls allow unauthorized data access",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "114",
+      "name": "Malicious insider intentionally causes security incident",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "118",
+      "name": "One of the company's critical 3rd party service providers goes out of business",
+      "category": "Operational",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "122",
+      "name": "Payment processing fraud results in chargebacks and losses",
+      "category": "Financial",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "126",
+      "name": "PCI-DSS non-compliance results in fines and loss of payment processing",
+      "category": "Legal & Compliance",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "130",
+      "name": "Physical offices are shut down due to a natural disaster or pandemic",
+      "category": "Operational",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "134",
+      "name": "Production data is deleted or corrupted due to negligence during migration process",
+      "category": "Operational",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "138",
+      "name": "Production database is encrypted from a ransomware attack",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "142",
+      "name": "Production defects and downtime erode customer trust and drive churn",
+      "category": "Operational",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "146",
+      "name": "Self-managed servers go unpatched creating known vulnerabilities",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "150",
+      "name": "Sensitive PII breach attracts class action litigation",
+      "category": "Legal & Compliance",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "154",
+      "name": "Supply chain attack compromises development or deployment pipeline",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    },
+    {
+      "id": "158",
+      "name": "Vulnerabilities are discovered in core 3rd party libraries",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Active - needs assessment"
+    }
+  ],
+  "archived": [
+    {
+      "id": "162",
+      "name": "Cash runway depletes faster than anticipated",
+      "category": "Financial",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "167",
+      "name": "Company decisions are no longer aligned with customer needs or feedback",
+      "category": "Strategic & Market",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "172",
+      "name": "Company employees use insider knowledge to commit fraud",
+      "category": "Fraud",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "177",
+      "name": "Company is brought to court due to lawsuit or legal challenge",
+      "category": "Legal & Compliance",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "182",
+      "name": "Competitive pricing pressure erodes margins",
+      "category": "Financial",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "187",
+      "name": "Core product fails to achieve product-market fit",
+      "category": "Strategic & Market",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "192",
+      "name": "Core product offering is copied by competitors",
+      "category": "Strategic & Market",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "197",
+      "name": "Customer data exposure damages Salient's brand reputation and erodes trust",
+      "category": "Strategic & Market",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "202",
+      "name": "Decentralized decision-making creates fragmented standards across architecture and security",
+      "category": "Operational",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "207",
+      "name": "Down round financing dilutes existing shareholders and damages morale",
+      "category": "Financial",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "212",
+      "name": "Employees exfiltrate company data for personal gain",
+      "category": "Fraud",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "217",
+      "name": "Expense report fraud through submission of false or inflated business expenses",
+      "category": "Fraud",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "222",
+      "name": "Incumbent in space creates offering that is competitive with core product",
+      "category": "Strategic & Market",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "227",
+      "name": "Lack of effective customer support leads to increased churn",
+      "category": "Strategic & Market",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "232",
+      "name": "Legacy systems and technical debt delay feature delivery",
+      "category": "Operational",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "237",
+      "name": "Management fraud through financial statement manipulation or misrepresentation",
+      "category": "Fraud",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "242",
+      "name": "Market expansion into new regions introduces conflicting regulatory requirements",
+      "category": "Legal & Compliance",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "247",
+      "name": "Product development velocity is not sufficient to meet deadlines, budget or required outcomes",
+      "category": "Operational",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "252",
+      "name": "Product loses relevance due to shifts in market conditions",
+      "category": "Strategic & Market",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "257",
+      "name": "Rapid growth outpaces organizational infrastructure",
+      "category": "Operational",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "262",
+      "name": "Regulatory reporting fraud through falsified compliance documentation or metrics",
+      "category": "Fraud",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "267",
+      "name": "Revenue is concentrated in a small number of customers",
+      "category": "Financial",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "272",
+      "name": "Sales team fraud through falsified customer contracts or revenue recognition manipulation",
+      "category": "Fraud",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "277",
+      "name": "Salient's production database is encrypted from a ransomware attack",
+      "category": "Security",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "282",
+      "name": "Single-platform dependency creates existential business risk",
+      "category": "Strategic & Market",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "287",
+      "name": "TCPA Violations cause monetary damages to customers and Salient.",
+      "category": "Legal & Compliance",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "292",
+      "name": "Toll Fraud could be generate significant financial losses",
+      "category": "Fraud",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    },
+    {
+      "id": "297",
+      "name": "Undocumented knowledge and processes create dangerous dependency on founders and key personnel",
+      "category": "Operational",
+      "inherent_risk": "Not yet assessed",
+      "residual_risk": "Not yet assessed",
+      "assessed": "Not yet assessed",
+      "status": "Archived"
+    }
+  ],
+  "library": [
+    {
+      "name": "Core product is taken down by a distributed-denial-of-service (DDoS) attack",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Confidential customer data is publicly released or exploited from a data breach",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Production database is encrypted from a ransomware attack",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Vulnerabilities are discovered in core 3rd party libraries",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Employee accounts are compromised through phishing or social engineering",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Malicious insider intentionally causes security incident",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Critical vulnerability in public-facing APIs is exploited",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Cloud infrastructure misconfiguration exposes sensitive data",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Cache or CDN misconfiguration leaks user-specific content across users",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Database security rules misconfiguration exposes data publicly",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Self-managed servers go unpatched creating known vulnerabilities",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Supply chain attack compromises development or deployment pipeline",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Credentials or API keys are accidentally exposed in public repositories",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Breach of stored customer credentials enables account takeovers and attacks on connected systems",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Inadequate access controls allow unauthorized data access",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Growth without security oversight erodes least-privilege controls and expands attack surface",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Company data is exposed through lost or stolen mobile devices",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Company hiring objectives are not aligned with market trends",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Company has difficulty hiring due to market or technology stack",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Inability to scale operations up or down as efficiently as needed",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "One of the company's critical 3rd party service providers goes out of business",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Physical offices are shut down due to a natural disaster or pandemic",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Product development velocity is not sufficient to meet deadlines, budget or required outcomes",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Production data is deleted or corrupted due to negligence during migration process",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Critical system has single point of failure without redundancy",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "On-premises hardware failure causes extended downtime due to manual recovery",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Over-reliance on contractors for core business functions",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Remote workforce creates productivity challenges",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Inadequate incident response capabilities delay recovery",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Infrastructure or application misconfigurations cause production outages",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Production defects and downtime erode customer trust and drive churn",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Legacy systems and technical debt delay feature delivery",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Unsupported legacy systems fail and cause extended downtime",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Decentralized decision-making creates fragmented standards across architecture and security",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Undocumented knowledge and processes create dangerous dependency on founders and key personnel",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Rapid growth outpaces organizational infrastructure",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Financial failure due to inability to receive additional fundraising",
+      "category": "Financial",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Cash runway depletes faster than anticipated",
+      "category": "Financial",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Revenue is concentrated in a small number of customers",
+      "category": "Financial",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Competitive pricing pressure erodes margins",
+      "category": "Financial",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Financial losses from fraud or embezzlement",
+      "category": "Financial",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Additional regulatory compliance laws are enacted that the company needs to fulfill",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Market expansion into new regions introduces conflicting regulatory requirements",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Company is brought to court due to lawsuit or legal challenge",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Intellectual property or strategy disclosure compromises competitive position",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "GDPR violation results in regulatory fines and enforcement action",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "CCPA/CPRA violation results in penalties and litigation",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Inability to locate or delete personal data prevents fulfilling data subject requests",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Compromised identity verification data undermines customer authentication",
+      "category": "Security",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Sensitive PII breach attracts class action litigation",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Protected health information (PHI) is mishandled or exposed resulting in HIPAA penalties and loss of healthcare customers",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "PCI-DSS non-compliance results in fines and loss of payment processing",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Improper handling of children's data results in COPPA penalties",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "SOC 2 audit findings jeopardize enterprise customer relationships",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Employment-related litigation from discrimination or wrongful termination claims",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Inadequate corporate governance creates compliance and control gaps",
+      "category": "Legal & Compliance",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Company decisions are no longer aligned with customer needs or feedback",
+      "category": "Strategic & Market",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Core product fails to achieve product-market fit",
+      "category": "Strategic & Market",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Core product offering is copied by competitors",
+      "category": "Strategic & Market",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Lack of effective customer support leads to increased churn",
+      "category": "Strategic & Market",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Customer data exposure damages brand reputation and erodes trust",
+      "category": "Strategic & Market",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Incumbent in space creates offering that is competitive with core product",
+      "category": "Strategic & Market",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Product loses relevance due to shifts in market conditions",
+      "category": "Strategic & Market",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Single-platform dependency creates existential business risk",
+      "category": "Strategic & Market",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Key talent is recruited away by competitors",
+      "category": "Strategic & Market",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Company employees use insider knowledge to commit fraud",
+      "category": "Fraud",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Employees exfiltrate company data for personal gain",
+      "category": "Fraud",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Accounts payable fraud through creation of fictitious vendors or invoice manipulation",
+      "category": "Fraud",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Expense report fraud through submission of false or inflated business expenses",
+      "category": "Fraud",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Payroll fraud through ghost employees or unauthorized salary modifications",
+      "category": "Fraud",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Procurement fraud through kickbacks or inflated vendor pricing schemes",
+      "category": "Fraud",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Management fraud through financial statement manipulation or misrepresentation",
+      "category": "Fraud",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Sales team fraud through falsified customer contracts or revenue recognition manipulation",
+      "category": "Fraud",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Regulatory reporting fraud through falsified compliance documentation or metrics",
+      "category": "Fraud",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Tax fraud through manipulation of financial records or improper deductions",
+      "category": "Fraud",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Down round financing dilutes existing shareholders and damages morale",
+      "category": "Financial",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Reliance on bridge financing creates unfavorable terms",
+      "category": "Financial",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    },
+    {
+      "name": "Employees mutiny and commandeer the ship",
+      "category": "Operational",
+      "status": "Library only",
+      "id": "",
+      "inherent_risk": "N/A - library only",
+      "residual_risk": "N/A - library only",
+      "assessed": "N/A - library only"
+    }
+  ]
+}
