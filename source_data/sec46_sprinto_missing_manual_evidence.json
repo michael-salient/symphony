@@ -1,0 +1,95 @@
+{
+  "ticket": "SEC-46",
+  "collected_at": "2026-06-05",
+  "method": "smooth_task server-side browser extraction using the oneleet profile",
+  "sprinto_audit_url": "https://app.sprinto.com/app/admin/audits/840b09b2-88b8-450d-9147-2d68f70f8bf2",
+  "audit": {
+    "title": "2026 - SOC2 Audit",
+    "framework": "SOC 2 Security, SOC 2 Confidentiality",
+    "period": "28 Sep, 2025 - 28 Sep, 2026",
+    "status": "Evidence review has not begun",
+    "control_summary": "88 Controls, 88 Ready for audit"
+  },
+  "extraction_notes": [
+    "The evidence tab showed 3 evidence sets with incomplete evidence counts.",
+    "The detail views showed the controls as Ready for audit, while the evidence tab showed incomplete counts: SDC 23 1/1 incomplete, SDC 25 1/4 incomplete, and SDC 389 1/3 incomplete.",
+    "Owner, assignee, explicit manual-vs-automated evidence type, and due dates were not visible in the inspected Sprinto views.",
+    "No pagination was visible in the evidence tab. The browser task could not conclusively prove there were no hidden rows behind unavailable filters, but the visible view reported 3 evidence sets."
+  ],
+  "items": [
+    {
+      "evidence_id": "SDC 23",
+      "evidence_title": "Internal Audit using Sprinto",
+      "evidence_tab_status": "1/1 incomplete",
+      "detail_status": "Ready for audit",
+      "control_details": "Entity uses Sprinto, a continuous monitoring system, to track and report the health of the information security program to the Information Security Officer and other stakeholders.",
+      "mapped_criteria": [
+        "SOC 2 CC4.1",
+        "SOC 2 CC4.2",
+        "SOC 2 CC5.2",
+        "SOC 2 CC7.3",
+        "SOC 2 CC7.4"
+      ],
+      "auditor_request": {
+        "request_title": "Provide evidence of internal audit and Sprinto monitoring review",
+        "request_text": "Please provide evidence that Sprinto was used during the audit period to monitor the information security program and report control health to the Information Security Officer and relevant stakeholders. Include the dated monitoring or internal audit report/export, the reviewer or approver, the review date, any exceptions identified, and evidence that exceptions were tracked through remediation or accepted with rationale.",
+        "requested_artifacts": [
+          "Sprinto control health or internal audit export for the audit period",
+          "Dated review record, meeting notes, or sign-off by the Information Security Officer or delegated reviewer",
+          "Exception/remediation tracker or tickets for any findings identified during review",
+          "Evidence of stakeholder distribution or acknowledgement, if available"
+        ],
+        "period": "28 Sep, 2025 - 28 Sep, 2026",
+        "owner_hint": "Information Security Officer or compliance owner"
+      }
+    },
+    {
+      "evidence_id": "SDC 25",
+      "evidence_title": "Periodic Review & Update of Cybersecurity & Privacy Program",
+      "evidence_tab_status": "1/4 incomplete",
+      "detail_status": "Ready for audit",
+      "control_details": "Entity's Senior Management reviews and approves the state of the Information Security program including policies, standards, and procedures, at planned intervals or if significant changes occur to ensure their continuing suitability, adequacy, and effectiveness.",
+      "mapped_criteria": [
+        "SOC 2 CC1.2",
+        "SOC 2 CC1.3",
+        "SOC 2 CC4.1",
+        "SOC 2 CC4.2",
+        "SOC 2 CC5.2"
+      ],
+      "auditor_request": {
+        "request_title": "Provide senior management review and approval of the cybersecurity and privacy program",
+        "request_text": "Please provide evidence that senior management reviewed and approved the cybersecurity and privacy program during the audit period, including policies, standards, procedures, and any material updates. The evidence should show the review date, attendees or approvers, scope of materials reviewed, decisions made, policy or program changes approved, and follow-up actions assigned.",
+        "requested_artifacts": [
+          "Security/privacy program review deck, agenda, or packet",
+          "Dated meeting minutes, approval record, or executive sign-off",
+          "List of policies, standards, and procedures reviewed",
+          "Change log or action tracker for updates, exceptions, or follow-up items"
+        ],
+        "period": "28 Sep, 2025 - 28 Sep, 2026",
+        "owner_hint": "Senior management, Information Security Officer, or compliance owner"
+      }
+    },
+    {
+      "evidence_id": "SDC 389",
+      "evidence_title": "Updates During Installations / Removals",
+      "evidence_tab_status": "1/3 incomplete",
+      "detail_status": "Ready for audit",
+      "control_details": "Entity periodically updates and reviews the inventory of systems as a part of installations, removals, and system updates.",
+      "mapped_criteria": [
+        "SOC 2 CC4.1"
+      ],
+      "auditor_request": {
+        "request_title": "Provide evidence of system inventory updates for installations, removals, and system changes",
+        "request_text": "Please provide evidence that the system inventory was updated and reviewed when systems were installed, removed, or materially changed during the audit period. Include the inventory records, related change or decommissioning tickets, dates of updates, reviewer approval, and any exceptions where inventory updates were delayed or not required.",
+        "requested_artifacts": [
+          "Current system inventory or asset register",
+          "Inventory change history for installations, removals, and material system updates",
+          "Change management, deployment, or decommissioning tickets tied to inventory updates",
+          "Reviewer sign-off or periodic inventory review evidence"
+        ],
+        "period": "28 Sep, 2025 - 28 Sep, 2026",
+        "owner_hint": "Infrastructure, IT operations, or compliance owner"
+      }
+    }
+  ]
+}
