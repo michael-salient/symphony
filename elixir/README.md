@@ -146,9 +146,12 @@ tracker:
   api_key: $LINEAR_API_KEY
 workspace:
   root: $SYMPHONY_WORKSPACE_ROOT
+  repository_url: https://github.com/your-org/default-repo.git
+  repository_aliases:
+    one-ui: git@github.com:your-org/one-ui.git
 hooks:
   after_create: |
-    git clone --depth 1 "$SOURCE_REPO_URL" .
+    git clone --depth 1 "$SYMPHONY_TARGET_REPOSITORY_URL" .
 codex:
   command: "$CODEX_BIN --config 'model=\"gpt-5.5\"' app-server"
 ```
@@ -158,6 +161,16 @@ codex:
   reload error until the file is fixed.
 - `server.port` or CLI `--port` enables the optional Phoenix LiveView dashboard and JSON API at
   `/`, `/api/v1/state`, `/api/v1/<issue_identifier>`, and `/api/v1/refresh`.
+- `workspace.repository_url` is the default git remote URL exposed to workspace hooks as
+  `SYMPHONY_TARGET_REPOSITORY_URL`.
+- `workspace.repository_aliases` maps repo aliases to git remote URLs. Symphony selects an alias
+  when it appears in the Linear issue title, labels, or branch name; otherwise it falls back to
+  `workspace.repository_url`.
+- Workspace hooks also receive `SYMPHONY_TARGET_REPOSITORY_ALIAS`,
+  `SYMPHONY_ISSUE_IDENTIFIER`, `SYMPHONY_ISSUE_TITLE`, and `SYMPHONY_ISSUE_BRANCH_NAME`.
+- When a target repository URL is configured, reused workspaces must already be a git checkout whose
+  `origin` remote matches the selected URL. Mismatched or non-git workspaces fail before Codex is
+  launched, preventing dispatch into a stale checkout.
 
 ## Web dashboard
 

@@ -17,9 +17,18 @@ polling:
   interval_ms: 5000
 workspace:
   root: ~/code/symphony-workspaces
+  repository_url: https://github.com/openai/symphony
+  # Add target repo aliases here when this workflow is expected to dispatch cross-repo work.
+  # Alias selection uses issue title, labels, and Linear branch name, then falls back to repository_url.
+  # repository_aliases:
+  #   one-ui: git@github.com:your-org/one-ui.git
 hooks:
   after_create: |
-    git clone --depth 1 https://github.com/openai/symphony .
+    if [ -z "${SYMPHONY_TARGET_REPOSITORY_URL:-}" ]; then
+      echo "workspace.repository_url or a matching workspace.repository_aliases entry is required" >&2
+      exit 1
+    fi
+    git clone --depth 1 "$SYMPHONY_TARGET_REPOSITORY_URL" .
     if command -v mise >/dev/null 2>&1; then
       cd elixir && mise trust && mise exec -- mix deps.get
     fi
@@ -69,6 +78,15 @@ Instructions:
 3. Final message must report completed actions and blockers only. Do not include "next steps for user".
 
 Work only in the provided repository copy. Do not touch any other path.
+
+## Workspace target repository
+
+Symphony creates the issue workspace as a checkout of the selected target repository. The workflow
+selects `workspace.repository_url` by default and may select a `workspace.repository_aliases` entry
+when the alias appears in the Linear issue title, labels, or branch name. Do not create a nested
+checkout for the target repository inside the provided workspace; if the workspace repo is wrong or a
+needed alias is missing, record the workflow configuration gap in the workpad and use the workflow's
+blocked-state path.
 
 ## Prerequisite: Linear MCP or `linear_graphql` tool is available
 

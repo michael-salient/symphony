@@ -380,6 +380,15 @@ Fields:
   - `~` is expanded.
   - Relative paths are resolved relative to the directory containing `WORKFLOW.md`.
   - The effective workspace root is normalized to an absolute path before use.
+- `repository_url` (string, OPTIONAL, implementation-defined)
+  - Default git remote URL used by workspace population hooks when configured.
+  - Implementations that expose this value to hooks SHOULD document the hook environment variable
+    names they provide.
+- `repository_aliases` (map of string alias to string git remote URL, OPTIONAL,
+  implementation-defined)
+  - Allows a workflow to map issue-visible repository names to concrete git remote URLs.
+  - Implementations MAY select aliases from tracker metadata such as issue title, labels, or branch
+    name.
 
 #### 5.3.4 `hooks` (object)
 
@@ -836,12 +845,16 @@ Algorithm summary:
 4. Mark `created_now=true` only if the directory was created during this call; otherwise
    `created_now=false`.
 5. If `created_now=true`, run `after_create` hook if configured.
+6. If repository validation is configured, verify the prepared or reused workspace matches the
+   selected target repository before launching the agent.
 
 Notes:
 
 - This section does not assume any specific repository/VCS workflow.
 - Workspace preparation beyond directory creation (for example dependency bootstrap, checkout/sync,
   code generation) is implementation-defined and is typically handled via hooks.
+- Implementations that support target-repository selection SHOULD fail fast when a reused workspace
+  is a checkout of a different repository than the selected target.
 
 ### 9.3 OPTIONAL Workspace Population (Implementation-Defined)
 
@@ -849,6 +862,11 @@ The spec does not require any built-in VCS or repository bootstrap behavior.
 
 Implementations MAY populate or synchronize the workspace using implementation-defined logic and/or
 hooks (for example `after_create` and/or `before_run`).
+
+Implementations MAY expose target-repository metadata to hooks, for example the selected repository
+URL, matched alias, issue identifier, issue title, and tracker branch name. Workflows that use those
+values SHOULD make the issue workspace itself the target checkout unless they explicitly document a
+nested-checkout policy.
 
 Failure handling:
 
@@ -873,6 +891,7 @@ Execution contract:
   `cwd`.
 - On POSIX systems, `sh -lc <script>` (or a stricter equivalent such as `bash -lc <script>`) is a
   conforming default.
+- Implementations MAY provide environment variables containing issue and workspace metadata.
 - Hook timeout uses `hooks.timeout_ms`; default: `60000 ms`.
 - Log hook start, failures, and timeouts.
 

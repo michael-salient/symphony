@@ -40,6 +40,116 @@ defmodule SymphonyElixir.WorkspaceAndConfigTest do
     end
   end
 
+  test "workspace selects configured repository alias from issue title and exposes it to hooks" do
+    test_root =
+      Path.join(
+        System.tmp_dir!(),
+        "symphony-elixir-workspace-repo-alias-#{System.unique_integer([:positive])}"
+      )
+
+    try do
+      default_repo = create_test_repo!(Path.join(test_root, "symphony"), "symphony\n")
+      one_ui_repo = create_test_repo!(Path.join(test_root, "one-ui"), "one-ui\n")
+      workspace_root = Path.join(test_root, "workspaces")
+
+      write_workflow_file!(Workflow.workflow_file_path(),
+        workspace_root: workspace_root,
+        workspace_repository_url: default_repo,
+        workspace_repository_aliases: %{"one-ui" => one_ui_repo},
+        hook_after_create: """
+        git clone --depth 1 "$SYMPHONY_TARGET_REPOSITORY_URL" .
+        printf '%s\\n' "$SYMPHONY_TARGET_REPOSITORY_ALIAS" > selected-alias.txt
+        """
+      )
+
+      issue = %Issue{
+        id: "31b2e530-0890-48cb-a4a4-efb89822dd1b",
+        identifier: "SEC-53",
+        title: "Fix dependency vulnerabilities in one-ui repo",
+        branch_name: "michael/sec-53-fix-dependency-vulnerabilities-in-one-ui-repo"
+      }
+
+      assert %{repository_alias: "one-ui", url: ^one_ui_repo} = Workspace.target_repository_for_issue(issue)
+      assert {:ok, workspace} = Workspace.create_for_issue(issue)
+      assert File.read!(Path.join(workspace, "README.md")) == "one-ui\n"
+      assert File.read!(Path.join(workspace, "selected-alias.txt")) == "one-ui\n"
+      assert File.exists?(Path.join(workspace, ".git"))
+      assert {"", 0} = System.cmd("git", ["-C", workspace, "config", "rerere.enabled", "true"])
+    after
+      File.rm_rf(test_root)
+    end
+  end
+
+  test "workspace repository alias matching ignores description-only mentions" do
+    test_root =
+      Path.join(
+        System.tmp_dir!(),
+        "symphony-elixir-workspace-repo-alias-description-#{System.unique_integer([:positive])}"
+      )
+
+    try do
+      workspace_root = Path.join(test_root, "workspaces")
+      one_ui_repo = Path.join(test_root, "one-ui")
+      default_repo = Path.join(test_root, "symphony")
+
+      write_workflow_file!(Workflow.workflow_file_path(),
+        workspace_root: workspace_root,
+        workspace_repository_url: default_repo,
+        workspace_repository_aliases: %{"one-ui" => one_ui_repo}
+      )
+
+      issue = %Issue{
+        identifier: "SEC-55",
+        title: "Dispatch SEC-53 into the target repo checkout with writable git metadata",
+        description: "SEC-53 asks for dependency fixes in one-ui, but the provided workspace is wrong.",
+        branch_name: "michael/sec-55-dispatch-sec-53-into-the-target-repo-checkout"
+      }
+
+      assert %{repository_alias: nil, url: ^default_repo} = Workspace.target_repository_for_issue(issue)
+    after
+      File.rm_rf(test_root)
+    end
+  end
+
+  test "workspace rejects reused git checkout when target repository changes" do
+    test_root =
+      Path.join(
+        System.tmp_dir!(),
+        "symphony-elixir-workspace-repo-mismatch-#{System.unique_integer([:positive])}"
+      )
+
+    try do
+      default_repo = create_test_repo!(Path.join(test_root, "symphony"), "symphony\n")
+      one_ui_repo = create_test_repo!(Path.join(test_root, "one-ui"), "one-ui\n")
+      workspace_root = Path.join(test_root, "workspaces")
+
+      write_workflow_file!(Workflow.workflow_file_path(),
+        workspace_root: workspace_root,
+        workspace_repository_url: default_repo,
+        workspace_repository_aliases: %{"one-ui" => one_ui_repo},
+        hook_after_create: "git clone --depth 1 \"$SYMPHONY_TARGET_REPOSITORY_URL\" ."
+      )
+
+      first_issue = %Issue{
+        identifier: "SEC-53",
+        title: "Fix Symphony dependency vulnerabilities"
+      }
+
+      second_issue = %Issue{
+        identifier: "SEC-53",
+        title: "Fix dependency vulnerabilities in one-ui repo"
+      }
+
+      assert {:ok, workspace} = Workspace.create_for_issue(first_issue)
+      assert File.read!(Path.join(workspace, "README.md")) == "symphony\n"
+
+      assert {:error, {:workspace_repository_mismatch, ^one_ui_repo, ^default_repo}} =
+               Workspace.create_for_issue(second_issue)
+    after
+      File.rm_rf(test_root)
+    end
+  end
+
   test "workspace path is deterministic per issue identifier" do
     workspace_root =
       Path.join(
@@ -1302,5 +1412,20 @@ defmodule SymphonyElixir.WorkspaceAndConfigTest do
     after
       File.rm_rf(test_root)
     end
+  end
+
+  defp create_test_repo!(repo_path, readme_content) do
+    File.mkdir_p!(repo_path)
+    File.write!(Path.join(repo_path, "README.md"), readme_content)
+    git!(repo_path, ["init", "-b", "main"])
+    git!(repo_path, ["config", "user.name", "Test User"])
+    git!(repo_path, ["config", "user.email", "test@example.com"])
+    git!(repo_path, ["add", "README.md"])
+    git!(repo_path, ["commit", "-m", "initial"])
+    repo_path
+  end
+
+  defp git!(repo_path, args) do
+    assert {_output, 0} = System.cmd("git", ["-C", repo_path | args], stderr_to_stdout: true)
   end
 end
