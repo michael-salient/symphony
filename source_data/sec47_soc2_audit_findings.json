@@ -1,0 +1,578 @@
+{
+  "ticket": "SEC-47",
+  "audit_url": "https://app.sprinto.com/app/admin/audits/840b09b2-88b8-450d-9147-2d68f70f8bf2?tab=evidence&evidenceFilters=%7B%7D&evidenceFiltersCount=0",
+  "extracted_at": "2026-06-05 11:28:52 PDT",
+  "audit_context": {
+    "audit_title": "2026 - SOC2 Audit",
+    "smooth_profile": "oneleet",
+    "evidence_tab_counts": {
+      "Controls": 88,
+      "Criteria's": 11,
+      "Information requested": 0,
+      "Ready for audit": 88,
+      "Review completed": 0
+    },
+    "control_export": {
+      "filename": "ControlMappingFile.csv",
+      "row_count": 171,
+      "columns": [
+        "Area Code",
+        "Area",
+        "Criteria Code",
+        "Criteria",
+        "Control Number",
+        "Control Statement",
+        "Evidence met (Count)",
+        "Evidence pending (Count)",
+        "Total evidence required (Count)"
+      ],
+      "aggregate_totals": {
+        "Evidence met (Count)": 421,
+        "Evidence pending (Count)": 22,
+        "Total evidence required (Count)": 443
+      }
+    },
+    "evidence_export_limitation": "The Sprinto `Download evidences` action did not produce an immediate browser download; Smooth reported that the evidence export is emailed later, so evidence-level owners, due dates, and item names could not be verified from the downloaded file in this run."
+  },
+  "ui_control_details": {
+    "9": {
+      "requirement": "SDC 9: Performance Review",
+      "completion": "1/3 incomplete",
+      "status": "Ready for audit",
+      "messages": ""
+    },
+    "23": {
+      "requirement": "SDC 23: Internal Audit using Sprinto",
+      "completion": "1/1 incomplete",
+      "status": "Ready for audit",
+      "messages": ""
+    },
+    "25": {
+      "requirement": "SDC 25: Periodic Review & Update of Cybersecurity & Privacy Program",
+      "completion": "1/4 incomplete",
+      "status": "Ready for audit",
+      "messages": "N/A"
+    },
+    "49": {
+      "requirement": "SDC 49: Encrypting Data At Rest",
+      "completion": "1/5 incomplete",
+      "status": "Ready for audit",
+      "messages": "N/A"
+    },
+    "59": {
+      "requirement": "SDC 59: Data Backups",
+      "completion": "1/6 incomplete",
+      "status": "Ready for audit",
+      "messages": ""
+    },
+    "60": {
+      "requirement": "SDC 60: Testing for Reliability and Integrity",
+      "completion": "1/1 incomplete",
+      "status": "Ready for audit",
+      "messages": ""
+    },
+    "62": {
+      "requirement": "SDC 62: Capacity & Performance Management",
+      "completion": "1/7 incomplete",
+      "status": "Ready for audit",
+      "messages": "N/A"
+    },
+    "97": {
+      "requirement": "SDC 97: Testing",
+      "completion": "1/1 incomplete",
+      "status": "Ready for audit",
+      "messages": ""
+    },
+    "389": {
+      "requirement": "SDC 389: Updates During Installations / Removals",
+      "completion": "1/3 incomplete",
+      "status": "Ready for audit",
+      "messages": ""
+    }
+  },
+  "pending_control_mapping_rows": [
+    {
+      "Area Code": "CC1",
+      "Area": "Control Environment",
+      "Criteria Code": "CC1.5",
+      "Criteria": "COSO Principle 5: The entity holds individuals accountable for their internal control responsibilities in the pursuit of objectives.",
+      "Control Number": 9,
+      "Control Statement": "Entity requires that all employees in client serving, IT, Engineering, and Information Security roles are periodically evaluated regarding their job responsibilities.",
+      "Evidence met (Count)": 2,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 3
+    },
+    {
+      "Area Code": "CC1",
+      "Area": "Control Environment",
+      "Criteria Code": "CC1.3",
+      "Criteria": "COSO Principle 3: Management establishes, with board oversight, structures, reporting lines, and appropriate authorities and responsibilities in the pursuit of objectives.",
+      "Control Number": 25,
+      "Control Statement": "Entity's Senior Management reviews and approves the state of the Information Security program including policies, standards, and procedures, at planned intervals or if significant changes occur to ensure their continuing suitability, adequacy, and effectiveness.",
+      "Evidence met (Count)": 3,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 4
+    },
+    {
+      "Area Code": "CC1",
+      "Area": "Control Environment",
+      "Criteria Code": "CC1.2",
+      "Criteria": "COSO Principle 2: The board of directors demonstrates independence from management and exercises oversight of the development and performance of internal control.",
+      "Control Number": 25,
+      "Control Statement": "Entity's Senior Management reviews and approves the state of the Information Security program including policies, standards, and procedures, at planned intervals or if significant changes occur to ensure their continuing suitability, adequacy, and effectiveness.",
+      "Evidence met (Count)": 3,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 4
+    },
+    {
+      "Area Code": "CC4",
+      "Area": "Monitoring Activities",
+      "Criteria Code": "CC4.1",
+      "Criteria": "COSO Principle 16: The entity selects, develops, and performs ongoing and/or separate evaluations to ascertain whether the components of internal control are present and functioning.",
+      "Control Number": 23,
+      "Control Statement": "Entity uses Sprinto, a continuous monitoring system, to track and report the health of the information security program to the Information Security Officer and other stakeholders.",
+      "Evidence met (Count)": 0,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 1
+    },
+    {
+      "Area Code": "CC4",
+      "Area": "Monitoring Activities",
+      "Criteria Code": "CC4.1",
+      "Criteria": "COSO Principle 16: The entity selects, develops, and performs ongoing and/or separate evaluations to ascertain whether the components of internal control are present and functioning.",
+      "Control Number": 25,
+      "Control Statement": "Entity's Senior Management reviews and approves the state of the Information Security program including policies, standards, and procedures, at planned intervals or if significant changes occur to ensure their continuing suitability, adequacy, and effectiveness.",
+      "Evidence met (Count)": 3,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 4
+    },
+    {
+      "Area Code": "CC4",
+      "Area": "Monitoring Activities",
+      "Criteria Code": "CC4.1",
+      "Criteria": "COSO Principle 16: The entity selects, develops, and performs ongoing and/or separate evaluations to ascertain whether the components of internal control are present and functioning.",
+      "Control Number": 389,
+      "Control Statement": "Entity periodically updates and reviews the inventory of systems as a part of installations, removals, and system updates.",
+      "Evidence met (Count)": 2,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 3
+    },
+    {
+      "Area Code": "CC4",
+      "Area": "Monitoring Activities",
+      "Criteria Code": "CC4.2",
+      "Criteria": "COSO Principle 17: The entity evaluates and communicates internal control deficiencies in a timely manner to those parties responsible for taking corrective action, including senior management and the board of directors, as appropriate.",
+      "Control Number": 23,
+      "Control Statement": "Entity uses Sprinto, a continuous monitoring system, to track and report the health of the information security program to the Information Security Officer and other stakeholders.",
+      "Evidence met (Count)": 0,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 1
+    },
+    {
+      "Area Code": "CC4",
+      "Area": "Monitoring Activities",
+      "Criteria Code": "CC4.2",
+      "Criteria": "COSO Principle 17: The entity evaluates and communicates internal control deficiencies in a timely manner to those parties responsible for taking corrective action, including senior management and the board of directors, as appropriate.",
+      "Control Number": 25,
+      "Control Statement": "Entity's Senior Management reviews and approves the state of the Information Security program including policies, standards, and procedures, at planned intervals or if significant changes occur to ensure their continuing suitability, adequacy, and effectiveness.",
+      "Evidence met (Count)": 3,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 4
+    },
+    {
+      "Area Code": "CC5",
+      "Area": "Control Activities",
+      "Criteria Code": "CC5.2",
+      "Criteria": "COSO Principle 11: The entity also selects and develops general control activities over technology to support the achievement of objectives.",
+      "Control Number": 23,
+      "Control Statement": "Entity uses Sprinto, a continuous monitoring system, to track and report the health of the information security program to the Information Security Officer and other stakeholders.",
+      "Evidence met (Count)": 0,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 1
+    },
+    {
+      "Area Code": "CC5",
+      "Area": "Control Activities",
+      "Criteria Code": "CC5.2",
+      "Criteria": "COSO Principle 11: The entity also selects and develops general control activities over technology to support the achievement of objectives.",
+      "Control Number": 25,
+      "Control Statement": "Entity's Senior Management reviews and approves the state of the Information Security program including policies, standards, and procedures, at planned intervals or if significant changes occur to ensure their continuing suitability, adequacy, and effectiveness.",
+      "Evidence met (Count)": 3,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 4
+    },
+    {
+      "Area Code": "CC6",
+      "Area": "Logical and Physical Access Controls",
+      "Criteria Code": "CC6.7",
+      "Criteria": "The entity restricts the transmission, movement, and removal of information to authorized internal and external users and processes, and protects it during transmission, movement, or removal to meet the entity's objectives.",
+      "Control Number": 49,
+      "Control Statement": "Entity has set up cryptographic mechanisms to encrypt all production database[s] that store customer data at rest.",
+      "Evidence met (Count)": 4,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 5
+    },
+    {
+      "Area Code": "CC7",
+      "Area": "System Operations",
+      "Criteria Code": "CC7.1",
+      "Criteria": "To meet its objectives, the entity uses detection and monitoring procedures to identify changes to configurations that result in new vulnerabilities and susceptibilities to newly discovered vulnerabilities.",
+      "Control Number": 62,
+      "Control Statement": "Entity has set up methods to continuously monitor critical assets to generate capacity alerts to ensure optimal performance, meet future capacity requirements, and protect against denial-of-service attacks.",
+      "Evidence met (Count)": 6,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 7
+    },
+    {
+      "Area Code": "CC7",
+      "Area": "System Operations",
+      "Criteria Code": "CC7.2",
+      "Criteria": "The entity monitors system components and the operation of those components for anomalies that are indicative of malicious acts, natural disasters, and errors affecting the entity's ability to meet its objectives.",
+      "Control Number": 62,
+      "Control Statement": "Entity has set up methods to continuously monitor critical assets to generate capacity alerts to ensure optimal performance, meet future capacity requirements, and protect against denial-of-service attacks.",
+      "Evidence met (Count)": 6,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 7
+    },
+    {
+      "Area Code": "CC7",
+      "Area": "System Operations",
+      "Criteria Code": "CC7.3",
+      "Criteria": "The entity evaluates security events to determine whether they could or have resulted in a failure of the entity to meet its objectives and takes actions to prevent or address such failures.",
+      "Control Number": 62,
+      "Control Statement": "Entity has set up methods to continuously monitor critical assets to generate capacity alerts to ensure optimal performance, meet future capacity requirements, and protect against denial-of-service attacks.",
+      "Evidence met (Count)": 6,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 7
+    },
+    {
+      "Area Code": "CC7",
+      "Area": "System Operations",
+      "Criteria Code": "CC7.3",
+      "Criteria": "The entity evaluates security events to determine whether they could or have resulted in a failure of the entity to meet its objectives and takes actions to prevent or address such failures.",
+      "Control Number": 23,
+      "Control Statement": "Entity uses Sprinto, a continuous monitoring system, to track and report the health of the information security program to the Information Security Officer and other stakeholders.",
+      "Evidence met (Count)": 0,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 1
+    },
+    {
+      "Area Code": "CC7",
+      "Area": "System Operations",
+      "Criteria Code": "CC7.4",
+      "Criteria": "The entity responds to identified security incidents by executing a defined incident response program to understand, contain, remediate, and communicate security incidents, as appropriate.",
+      "Control Number": 23,
+      "Control Statement": "Entity uses Sprinto, a continuous monitoring system, to track and report the health of the information security program to the Information Security Officer and other stakeholders.",
+      "Evidence met (Count)": 0,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 1
+    },
+    {
+      "Area Code": "C1",
+      "Area": "Additional Criteria for Confidentiality",
+      "Criteria Code": "C1.1",
+      "Criteria": "The entity identifies and maintains confidential information to meet the entity's objectives related to confidentiality.",
+      "Control Number": 49,
+      "Control Statement": "Entity has set up cryptographic mechanisms to encrypt all production database[s] that store customer data at rest.",
+      "Evidence met (Count)": 4,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 5
+    },
+    {
+      "Area Code": "A1",
+      "Area": "Additional Criteria for Availability",
+      "Criteria Code": "A1.2",
+      "Criteria": "The entity authorizes, designs, develops or acquires, implements, operates, approves, maintains, and monitors environmental protections, software, data back-up processes, and recovery infrastructure to meet its objectives.",
+      "Control Number": 59,
+      "Control Statement": "Entity backs up relevant user and system data regularly to meet recovery time and recovery point objectives and verifies the integrity of these backups.",
+      "Evidence met (Count)": 5,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 6
+    },
+    {
+      "Area Code": "A1",
+      "Area": "Additional Criteria for Availability",
+      "Criteria Code": "A1.2",
+      "Criteria": "The entity authorizes, designs, develops or acquires, implements, operates, approves, maintains, and monitors environmental protections, software, data back-up processes, and recovery infrastructure to meet its objectives.",
+      "Control Number": 60,
+      "Control Statement": "Entity tests backup information periodically to verify media reliability and information integrity.",
+      "Evidence met (Count)": 0,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 1
+    },
+    {
+      "Area Code": "A1",
+      "Area": "Additional Criteria for Availability",
+      "Criteria Code": "A1.1",
+      "Criteria": "The entity maintains, monitors, and evaluates current processing capacity and use of system components to manage capacity demand and enable additional capacity to meet its objectives.",
+      "Control Number": 62,
+      "Control Statement": "Entity has set up methods to continuously monitor critical assets to generate capacity alerts to ensure optimal performance, meet future capacity requirements, and protect against denial-of-service attacks.",
+      "Evidence met (Count)": 6,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 7
+    },
+    {
+      "Area Code": "A1",
+      "Area": "Additional Criteria for Availability",
+      "Criteria Code": "A1.3",
+      "Criteria": "The entity tests recovery plan procedures supporting system recovery to meet its objectives.",
+      "Control Number": 97,
+      "Control Statement": "Entity has procedures to conduct regular tests and exercises that determine the effectiveness and readiness to execute the contingency plan.",
+      "Evidence met (Count)": 0,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 1
+    },
+    {
+      "Area Code": "A1",
+      "Area": "Additional Criteria for Availability",
+      "Criteria Code": "A1.3",
+      "Criteria": "The entity tests recovery plan procedures supporting system recovery to meet its objectives.",
+      "Control Number": 60,
+      "Control Statement": "Entity tests backup information periodically to verify media reliability and information integrity.",
+      "Evidence met (Count)": 0,
+      "Evidence pending (Count)": 1,
+      "Total evidence required (Count)": 1
+    }
+  ],
+  "unique_control_findings": [
+    {
+      "control_number": 9,
+      "ui_requirement": "SDC 9: Performance Review",
+      "ui_completion": "1/3 incomplete",
+      "ui_status": "Ready for audit",
+      "messages": "None visible",
+      "criteria_codes": "CC1.5",
+      "area_codes": "CC1",
+      "mapping_count": 1,
+      "met_sum": 2,
+      "pending_sum": 1,
+      "required_sum": 3,
+      "zero_completed_mappings": 0,
+      "control_statement": "Entity requires that all employees in client serving, IT, Engineering, and Information Security roles are periodically evaluated regarding their job responsibilities.",
+      "severity": "Medium",
+      "why_concerning": "The control is marked Ready for audit, but Sprinto still reports one incomplete evidence set; unresolved pending evidence may trigger an auditor request or exception.",
+      "recommended_remediation": "Complete/upload the pending evidence, confirm it covers every mapped criteria code, rerun the Sprinto control export, and verify Evidence pending is 0 before auditor review."
+    },
+    {
+      "control_number": 23,
+      "ui_requirement": "SDC 23: Internal Audit using Sprinto",
+      "ui_completion": "1/1 incomplete",
+      "ui_status": "Ready for audit",
+      "messages": "None visible",
+      "criteria_codes": "CC4.1, CC4.2, CC5.2, CC7.3, CC7.4",
+      "area_codes": "CC4, CC5, CC7",
+      "mapping_count": 5,
+      "met_sum": 0,
+      "pending_sum": 5,
+      "required_sum": 5,
+      "zero_completed_mappings": 5,
+      "control_statement": "Entity uses Sprinto, a continuous monitoring system, to track and report the health of the information security program to the Information Security Officer and other stakeholders.",
+      "severity": "High",
+      "why_concerning": "One or more SOC 2 criteria mappings have no completed evidence; auditors may be unable to test this control for the mapped trust criteria.",
+      "recommended_remediation": "Complete/upload the pending evidence, confirm it covers every mapped criteria code, rerun the Sprinto control export, and verify Evidence pending is 0 before auditor review."
+    },
+    {
+      "control_number": 25,
+      "ui_requirement": "SDC 25: Periodic Review & Update of Cybersecurity & Privacy Program",
+      "ui_completion": "1/4 incomplete",
+      "ui_status": "Ready for audit",
+      "messages": "N/A",
+      "criteria_codes": "CC1.2, CC1.3, CC4.1, CC4.2, CC5.2",
+      "area_codes": "CC1, CC4, CC5",
+      "mapping_count": 5,
+      "met_sum": 15,
+      "pending_sum": 5,
+      "required_sum": 20,
+      "zero_completed_mappings": 0,
+      "control_statement": "Entity's Senior Management reviews and approves the state of the Information Security program including policies, standards, and procedures, at planned intervals or if significant changes occur to ensure their continuing suitability, adequacy, and effectiveness.",
+      "severity": "Medium",
+      "why_concerning": "The control is marked Ready for audit, but Sprinto still reports one incomplete evidence set; unresolved pending evidence may trigger an auditor request or exception.",
+      "recommended_remediation": "Complete/upload the pending evidence, confirm it covers every mapped criteria code, rerun the Sprinto control export, and verify Evidence pending is 0 before auditor review."
+    },
+    {
+      "control_number": 49,
+      "ui_requirement": "SDC 49: Encrypting Data At Rest",
+      "ui_completion": "1/5 incomplete",
+      "ui_status": "Ready for audit",
+      "messages": "N/A",
+      "criteria_codes": "C1.1, CC6.7",
+      "area_codes": "C1, CC6",
+      "mapping_count": 2,
+      "met_sum": 8,
+      "pending_sum": 2,
+      "required_sum": 10,
+      "zero_completed_mappings": 0,
+      "control_statement": "Entity has set up cryptographic mechanisms to encrypt all production database[s] that store customer data at rest.",
+      "severity": "Medium",
+      "why_concerning": "The control is marked Ready for audit, but Sprinto still reports one incomplete evidence set; unresolved pending evidence may trigger an auditor request or exception.",
+      "recommended_remediation": "Complete/upload the pending evidence, confirm it covers every mapped criteria code, rerun the Sprinto control export, and verify Evidence pending is 0 before auditor review."
+    },
+    {
+      "control_number": 59,
+      "ui_requirement": "SDC 59: Data Backups",
+      "ui_completion": "1/6 incomplete",
+      "ui_status": "Ready for audit",
+      "messages": "None visible",
+      "criteria_codes": "A1.2",
+      "area_codes": "A1",
+      "mapping_count": 1,
+      "met_sum": 5,
+      "pending_sum": 1,
+      "required_sum": 6,
+      "zero_completed_mappings": 0,
+      "control_statement": "Entity backs up relevant user and system data regularly to meet recovery time and recovery point objectives and verifies the integrity of these backups.",
+      "severity": "Medium",
+      "why_concerning": "The control is marked Ready for audit, but Sprinto still reports one incomplete evidence set; unresolved pending evidence may trigger an auditor request or exception.",
+      "recommended_remediation": "Complete/upload the pending evidence, confirm it covers every mapped criteria code, rerun the Sprinto control export, and verify Evidence pending is 0 before auditor review."
+    },
+    {
+      "control_number": 60,
+      "ui_requirement": "SDC 60: Testing for Reliability and Integrity",
+      "ui_completion": "1/1 incomplete",
+      "ui_status": "Ready for audit",
+      "messages": "None visible",
+      "criteria_codes": "A1.2, A1.3",
+      "area_codes": "A1",
+      "mapping_count": 2,
+      "met_sum": 0,
+      "pending_sum": 2,
+      "required_sum": 2,
+      "zero_completed_mappings": 2,
+      "control_statement": "Entity tests backup information periodically to verify media reliability and information integrity.",
+      "severity": "High",
+      "why_concerning": "One or more SOC 2 criteria mappings have no completed evidence; auditors may be unable to test this control for the mapped trust criteria.",
+      "recommended_remediation": "Complete/upload the pending evidence, confirm it covers every mapped criteria code, rerun the Sprinto control export, and verify Evidence pending is 0 before auditor review."
+    },
+    {
+      "control_number": 62,
+      "ui_requirement": "SDC 62: Capacity & Performance Management",
+      "ui_completion": "1/7 incomplete",
+      "ui_status": "Ready for audit",
+      "messages": "N/A",
+      "criteria_codes": "A1.1, CC7.1, CC7.2, CC7.3",
+      "area_codes": "A1, CC7",
+      "mapping_count": 4,
+      "met_sum": 24,
+      "pending_sum": 4,
+      "required_sum": 28,
+      "zero_completed_mappings": 0,
+      "control_statement": "Entity has set up methods to continuously monitor critical assets to generate capacity alerts to ensure optimal performance, meet future capacity requirements, and protect against denial-of-service attacks.",
+      "severity": "Medium",
+      "why_concerning": "The control is marked Ready for audit, but Sprinto still reports one incomplete evidence set; unresolved pending evidence may trigger an auditor request or exception.",
+      "recommended_remediation": "Complete/upload the pending evidence, confirm it covers every mapped criteria code, rerun the Sprinto control export, and verify Evidence pending is 0 before auditor review."
+    },
+    {
+      "control_number": 97,
+      "ui_requirement": "SDC 97: Testing",
+      "ui_completion": "1/1 incomplete",
+      "ui_status": "Ready for audit",
+      "messages": "None visible",
+      "criteria_codes": "A1.3",
+      "area_codes": "A1",
+      "mapping_count": 1,
+      "met_sum": 0,
+      "pending_sum": 1,
+      "required_sum": 1,
+      "zero_completed_mappings": 1,
+      "control_statement": "Entity has procedures to conduct regular tests and exercises that determine the effectiveness and readiness to execute the contingency plan.",
+      "severity": "High",
+      "why_concerning": "One or more SOC 2 criteria mappings have no completed evidence; auditors may be unable to test this control for the mapped trust criteria.",
+      "recommended_remediation": "Complete/upload the pending evidence, confirm it covers every mapped criteria code, rerun the Sprinto control export, and verify Evidence pending is 0 before auditor review."
+    },
+    {
+      "control_number": 389,
+      "ui_requirement": "SDC 389: Updates During Installations / Removals",
+      "ui_completion": "1/3 incomplete",
+      "ui_status": "Ready for audit",
+      "messages": "None visible",
+      "criteria_codes": "CC4.1",
+      "area_codes": "CC4",
+      "mapping_count": 1,
+      "met_sum": 2,
+      "pending_sum": 1,
+      "required_sum": 3,
+      "zero_completed_mappings": 0,
+      "control_statement": "Entity periodically updates and reviews the inventory of systems as a part of installations, removals, and system updates.",
+      "severity": "Medium",
+      "why_concerning": "The control is marked Ready for audit, but Sprinto still reports one incomplete evidence set; unresolved pending evidence may trigger an auditor request or exception.",
+      "recommended_remediation": "Complete/upload the pending evidence, confirm it covers every mapped criteria code, rerun the Sprinto control export, and verify Evidence pending is 0 before auditor review."
+    }
+  ],
+  "area_summary": [
+    {
+      "area_code": "A1",
+      "area": "Additional Criteria for Availability",
+      "pending_mapping_count": 5,
+      "unique_controls": 4,
+      "pending_evidence_count": 5,
+      "zero_completed_mappings": 3,
+      "criteria_codes": "A1.1, A1.2, A1.3"
+    },
+    {
+      "area_code": "C1",
+      "area": "Additional Criteria for Confidentiality",
+      "pending_mapping_count": 1,
+      "unique_controls": 1,
+      "pending_evidence_count": 1,
+      "zero_completed_mappings": 0,
+      "criteria_codes": "C1.1"
+    },
+    {
+      "area_code": "CC1",
+      "area": "Control Environment",
+      "pending_mapping_count": 3,
+      "unique_controls": 2,
+      "pending_evidence_count": 3,
+      "zero_completed_mappings": 0,
+      "criteria_codes": "CC1.2, CC1.3, CC1.5"
+    },
+    {
+      "area_code": "CC4",
+      "area": "Monitoring Activities",
+      "pending_mapping_count": 5,
+      "unique_controls": 3,
+      "pending_evidence_count": 5,
+      "zero_completed_mappings": 2,
+      "criteria_codes": "CC4.1, CC4.2"
+    },
+    {
+      "area_code": "CC5",
+      "area": "Control Activities",
+      "pending_mapping_count": 2,
+      "unique_controls": 2,
+      "pending_evidence_count": 2,
+      "zero_completed_mappings": 1,
+      "criteria_codes": "CC5.2"
+    },
+    {
+      "area_code": "CC6",
+      "area": "Logical and Physical Access Controls",
+      "pending_mapping_count": 1,
+      "unique_controls": 1,
+      "pending_evidence_count": 1,
+      "zero_completed_mappings": 0,
+      "criteria_codes": "CC6.7"
+    },
+    {
+      "area_code": "CC7",
+      "area": "System Operations",
+      "pending_mapping_count": 5,
+      "unique_controls": 2,
+      "pending_evidence_count": 5,
+      "zero_completed_mappings": 2,
+      "criteria_codes": "CC7.1, CC7.2, CC7.3, CC7.4"
+    }
+  ],
+  "summary": {
+    "pending_mapping_rows": 22,
+    "unique_controls_with_pending_evidence": 9,
+    "high_severity_unique_controls": 3,
+    "medium_severity_unique_controls": 6,
+    "areas_with_pending_evidence": 7
+  },
+  "limitations": [
+    "The Sprinto `Download evidences` action did not produce an immediate browser download; Smooth reported that the evidence export is emailed later, so evidence-level owners, due dates, and item names could not be verified from the downloaded file in this run.",
+    "The audit table did not show owner, assignee, due date, or last-updated fields for the pending rows.",
+    "No failed, rejected, Information requested, or non-Ready-for-audit statuses were visible during the Smooth review."
+  ]
+}
