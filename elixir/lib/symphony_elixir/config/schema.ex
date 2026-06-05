@@ -91,12 +91,31 @@ defmodule SymphonyElixir.Config.Schema do
     @primary_key false
     embedded_schema do
       field(:root, :string, default: Path.join(System.tmp_dir!(), "symphony_workspaces"))
+      field(:repository_url, :string)
+      field(:repository_aliases, :map, default: %{})
     end
 
     @spec changeset(%__MODULE__{}, map()) :: Ecto.Changeset.t()
     def changeset(schema, attrs) do
       schema
-      |> cast(attrs, [:root], empty_values: [])
+      |> cast(attrs, [:root, :repository_url, :repository_aliases], empty_values: [])
+      |> validate_repository_aliases()
+    end
+
+    defp validate_repository_aliases(changeset) do
+      validate_change(changeset, :repository_aliases, &repository_alias_errors/2)
+    end
+
+    defp repository_alias_errors(:repository_aliases, aliases) do
+      if Enum.any?(aliases, &invalid_repository_alias?/1) do
+        [repository_aliases: "must map non-empty alias names to non-empty repository URLs"]
+      else
+        []
+      end
+    end
+
+    defp invalid_repository_alias?({alias, url}) do
+      String.trim(to_string(alias)) == "" or not is_binary(url) or String.trim(url) == ""
     end
   end
 
@@ -374,7 +393,9 @@ defmodule SymphonyElixir.Config.Schema do
 
     workspace = %{
       settings.workspace
-      | root: resolve_path_value(settings.workspace.root, Path.join(System.tmp_dir!(), "symphony_workspaces"))
+      | root: resolve_path_value(settings.workspace.root, Path.join(System.tmp_dir!(), "symphony_workspaces")),
+        repository_url: normalize_optional_string(settings.workspace.repository_url),
+        repository_aliases: normalize_repository_aliases(settings.workspace.repository_aliases)
     }
 
     codex = %{
@@ -397,6 +418,24 @@ defmodule SymphonyElixir.Config.Schema do
 
   defp normalize_optional_map(nil), do: nil
   defp normalize_optional_map(value) when is_map(value), do: normalize_keys(value)
+
+  defp normalize_optional_string(value) when is_binary(value) do
+    case String.trim(value) do
+      "" -> nil
+      trimmed -> trimmed
+    end
+  end
+
+  defp normalize_optional_string(_value), do: nil
+
+  defp normalize_repository_aliases(aliases) when is_map(aliases) do
+    aliases
+    |> normalize_keys()
+    |> Enum.reduce(%{}, fn {alias, url}, acc ->
+      normalized_alias = alias |> to_string() |> String.trim()
+      Map.put(acc, normalized_alias, normalize_optional_string(url))
+    end)
+  end
 
   defp normalize_key(value) when is_atom(value), do: Atom.to_string(value)
   defp normalize_key(value), do: to_string(value)

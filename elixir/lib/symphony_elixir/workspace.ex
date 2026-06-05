@@ -21,7 +21,8 @@ defmodule SymphonyElixir.Workspace do
       with {:ok, workspace} <- workspace_path_for_issue(safe_id, worker_host),
            :ok <- validate_workspace_path(workspace, worker_host),
            {:ok, workspace, created?} <- ensure_workspace(workspace, worker_host),
-           :ok <- maybe_run_after_create_hook(workspace, issue_context, created?, worker_host) do
+           :ok <- maybe_run_after_create_hook(workspace, issue_context, created?, worker_host),
+           :ok <- validate_target_repository(workspace, issue_context, worker_host) do
         {:ok, workspace}
       end
     rescue
@@ -29,6 +30,19 @@ defmodule SymphonyElixir.Workspace do
         Logger.error("Workspace creation failed #{issue_log_context(issue_context)} worker_host=#{worker_host_for_log(worker_host)} error=#{Exception.message(error)}")
         {:error, error}
     end
+  end
+
+  @spec target_repository_for_issue(map() | String.t() | nil) :: %{
+          repository_alias: String.t() | nil,
+          url: String.t() | nil
+        }
+  def target_repository_for_issue(issue_or_identifier) do
+    issue_context = issue_context(issue_or_identifier)
+
+    %{
+      repository_alias: issue_context.target_repository_alias,
+      url: issue_context.target_repository_url
+    }
   end
 
   defp ensure_workspace(workspace, nil) do
@@ -238,7 +252,7 @@ defmodule SymphonyElixir.Workspace do
             run_hook(
               command,
               workspace,
-              %{issue_id: nil, issue_identifier: Path.basename(workspace)},
+              issue_context(Path.basename(workspace)),
               "before_remove",
               nil
             )
@@ -258,8 +272,11 @@ defmodule SymphonyElixir.Workspace do
         :ok
 
       command ->
+        issue_context = issue_context(Path.basename(workspace))
+
         script =
           [
+            hook_env_exports(issue_context),
             remote_shell_assign("workspace", workspace),
             "if [ -d \"$workspace\" ]; then",
             "  cd \"$workspace\"",
@@ -274,7 +291,7 @@ defmodule SymphonyElixir.Workspace do
             handle_hook_command_result(
               {output, status},
               workspace,
-              %{issue_id: nil, issue_identifier: Path.basename(workspace)},
+              issue_context,
               "before_remove"
             )
 
@@ -298,7 +315,11 @@ defmodule SymphonyElixir.Workspace do
 
     task =
       Task.async(fn ->
-        System.cmd("sh", ["-lc", command], cd: workspace, stderr_to_stdout: true)
+        System.cmd("sh", ["-lc", command],
+          cd: workspace,
+          env: hook_env(issue_context),
+          stderr_to_stdout: true
+        )
       end)
 
     case Task.yield(task, timeout_ms) do
@@ -319,7 +340,16 @@ defmodule SymphonyElixir.Workspace do
 
     Logger.info("Running workspace hook hook=#{hook_name} #{issue_log_context(issue_context)} workspace=#{workspace} worker_host=#{worker_host}")
 
-    case run_remote_command(worker_host, "cd #{shell_escape(workspace)} && #{command}", timeout_ms) do
+    script =
+      [
+        hook_env_exports(issue_context),
+        "cd #{shell_escape(workspace)}",
+        command
+      ]
+      |> Enum.reject(&(&1 == ""))
+      |> Enum.join("\n")
+
+    case run_remote_command(worker_host, script, timeout_ms) do
       {:ok, cmd_result} ->
         handle_hook_command_result(cmd_result, workspace, issue_context, hook_name)
 
@@ -328,6 +358,68 @@ defmodule SymphonyElixir.Workspace do
 
       {:error, reason} ->
         {:error, reason}
+    end
+  end
+
+  defp validate_target_repository(_workspace, %{target_repository_url: nil}, _worker_host), do: :ok
+
+  defp validate_target_repository(workspace, issue_context, nil) do
+    expected_url = issue_context.target_repository_url
+
+    case System.cmd("git", ["-C", workspace, "remote", "get-url", "origin"], stderr_to_stdout: true) do
+      {actual_url, 0} ->
+        validate_repository_remote(expected_url, actual_url)
+
+      {output, status} ->
+        {:error, {:workspace_repository_remote_unavailable, expected_url, status, output}}
+    end
+  end
+
+  defp validate_target_repository(workspace, issue_context, worker_host) when is_binary(worker_host) do
+    expected_url = issue_context.target_repository_url
+
+    script =
+      [
+        remote_shell_assign("workspace", workspace),
+        "git -C \"$workspace\" remote get-url origin"
+      ]
+      |> Enum.join("\n")
+
+    case run_remote_command(worker_host, script, Config.settings!().hooks.timeout_ms) do
+      {:ok, {actual_url, 0}} ->
+        validate_repository_remote(expected_url, actual_url)
+
+      {:ok, {output, status}} ->
+        {:error, {:workspace_repository_remote_unavailable, expected_url, status, output}}
+
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
+
+  defp validate_repository_remote(expected_url, actual_url) do
+    normalized_expected = normalize_repository_url(expected_url)
+    normalized_actual = normalize_repository_url(actual_url)
+
+    if normalized_expected == normalized_actual do
+      :ok
+    else
+      {:error, {:workspace_repository_mismatch, expected_url, String.trim(actual_url)}}
+    end
+  end
+
+  defp normalize_repository_url(url) when is_binary(url) do
+    url
+    |> String.trim()
+    |> String.trim_trailing("/")
+    |> trim_git_suffix()
+  end
+
+  defp trim_git_suffix(url) do
+    if String.ends_with?(url, ".git") do
+      String.slice(url, 0, byte_size(url) - 4)
+    else
+      url
     end
   end
 
@@ -453,28 +545,125 @@ defmodule SymphonyElixir.Workspace do
     "'" <> String.replace(value, "'", "'\"'\"'") <> "'"
   end
 
+  defp hook_env(issue_context) do
+    [
+      {"SYMPHONY_ISSUE_ID", env_value(issue_context.issue_id)},
+      {"SYMPHONY_ISSUE_IDENTIFIER", env_value(issue_context.issue_identifier)},
+      {"SYMPHONY_ISSUE_TITLE", env_value(issue_context.issue_title)},
+      {"SYMPHONY_ISSUE_BRANCH_NAME", env_value(issue_context.issue_branch_name)},
+      {"SYMPHONY_TARGET_REPOSITORY_ALIAS", env_value(issue_context.target_repository_alias)},
+      {"SYMPHONY_TARGET_REPOSITORY_URL", env_value(issue_context.target_repository_url)}
+    ]
+  end
+
+  defp hook_env_exports(issue_context) do
+    issue_context
+    |> hook_env()
+    |> Enum.map_join("\n", fn {key, value} -> "export #{key}=#{shell_escape(value)}" end)
+  end
+
+  defp env_value(value) when is_binary(value), do: value
+  defp env_value(nil), do: ""
+  defp env_value(value), do: to_string(value)
+
   defp worker_host_for_log(nil), do: "local"
   defp worker_host_for_log(worker_host), do: worker_host
 
-  defp issue_context(%{id: issue_id, identifier: identifier}) do
-    %{
-      issue_id: issue_id,
-      issue_identifier: identifier || "issue"
+  defp issue_context(%{} = issue) do
+    context = %{
+      issue_id: issue_field(issue, :id),
+      issue_identifier: issue_field(issue, :identifier) || "issue",
+      issue_title: issue_field(issue, :title),
+      issue_description: issue_field(issue, :description),
+      issue_branch_name: issue_field(issue, :branch_name) || issue_field(issue, "branchName"),
+      issue_labels: normalize_issue_labels(issue_field(issue, :labels))
     }
+
+    Map.merge(context, target_repository_context(context))
   end
 
   defp issue_context(identifier) when is_binary(identifier) do
-    %{
+    context = %{
       issue_id: nil,
-      issue_identifier: identifier
+      issue_identifier: identifier,
+      issue_title: nil,
+      issue_description: nil,
+      issue_branch_name: nil,
+      issue_labels: []
     }
+
+    Map.merge(context, target_repository_context(context))
   end
 
   defp issue_context(_identifier) do
-    %{
+    context = %{
       issue_id: nil,
-      issue_identifier: "issue"
+      issue_identifier: "issue",
+      issue_title: nil,
+      issue_description: nil,
+      issue_branch_name: nil,
+      issue_labels: []
     }
+
+    Map.merge(context, target_repository_context(context))
+  end
+
+  defp issue_field(issue, field) when is_atom(field) do
+    Map.get(issue, field) || Map.get(issue, Atom.to_string(field))
+  end
+
+  defp issue_field(issue, field) when is_binary(field) do
+    Map.get(issue, field)
+  end
+
+  defp normalize_issue_labels(labels) when is_list(labels) do
+    labels
+    |> Enum.map(&to_string/1)
+    |> Enum.map(&String.trim/1)
+    |> Enum.reject(&(&1 == ""))
+  end
+
+  defp normalize_issue_labels(_labels), do: []
+
+  defp target_repository_context(issue_context) do
+    workspace = Config.settings!().workspace
+    aliases = workspace.repository_aliases || %{}
+
+    case matching_repository_alias(aliases, issue_context) do
+      {repository_alias, url} ->
+        %{target_repository_alias: repository_alias, target_repository_url: url}
+
+      nil ->
+        %{target_repository_alias: nil, target_repository_url: workspace.repository_url}
+    end
+  end
+
+  defp matching_repository_alias(repository_aliases, issue_context) when is_map(repository_aliases) do
+    repository_aliases
+    |> Enum.sort_by(fn {repository_alias, _url} -> -byte_size(to_string(repository_alias)) end)
+    |> Enum.find(fn {repository_alias, _url} ->
+      repository_alias_matches_issue?(repository_alias, issue_context)
+    end)
+  end
+
+  defp repository_alias_matches_issue?(repository_alias, issue_context) do
+    normalized_alias =
+      repository_alias
+      |> to_string()
+      |> String.downcase()
+
+    label_match? =
+      issue_context.issue_labels
+      |> Enum.map(&String.downcase/1)
+      |> Enum.any?(&(&1 == normalized_alias))
+
+    searchable_text =
+      [issue_context.issue_title, issue_context.issue_branch_name]
+      |> Enum.reject(&is_nil/1)
+      |> Enum.join(" ")
+      |> String.downcase()
+
+    label_match? or String.contains?(searchable_text, normalized_alias)
   end
 
   defp issue_log_context(%{issue_id: issue_id, issue_identifier: issue_identifier}) do
