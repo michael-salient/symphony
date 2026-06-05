@@ -103,20 +103,19 @@ defmodule SymphonyElixir.Config.Schema do
     end
 
     defp validate_repository_aliases(changeset) do
-      validate_change(changeset, :repository_aliases, fn :repository_aliases, aliases ->
-        cond do
-          not is_map(aliases) ->
-            [repository_aliases: "must be a map of alias names to repository URLs"]
+      validate_change(changeset, :repository_aliases, &repository_alias_errors/2)
+    end
 
-          Enum.any?(aliases, fn {alias, url} ->
-            String.trim(to_string(alias)) == "" or not is_binary(url) or String.trim(url) == ""
-          end) ->
-            [repository_aliases: "must map non-empty alias names to non-empty repository URLs"]
+    defp repository_alias_errors(:repository_aliases, aliases) do
+      if Enum.any?(aliases, &invalid_repository_alias?/1) do
+        [repository_aliases: "must map non-empty alias names to non-empty repository URLs"]
+      else
+        []
+      end
+    end
 
-          true ->
-            []
-        end
-      end)
+    defp invalid_repository_alias?({alias, url}) do
+      String.trim(to_string(alias)) == "" or not is_binary(url) or String.trim(url) == ""
     end
   end
 
@@ -434,15 +433,9 @@ defmodule SymphonyElixir.Config.Schema do
     |> normalize_keys()
     |> Enum.reduce(%{}, fn {alias, url}, acc ->
       normalized_alias = alias |> to_string() |> String.trim()
-
-      case normalize_optional_string(url) do
-        nil -> acc
-        normalized_url -> Map.put(acc, normalized_alias, normalized_url)
-      end
+      Map.put(acc, normalized_alias, normalize_optional_string(url))
     end)
   end
-
-  defp normalize_repository_aliases(_aliases), do: %{}
 
   defp normalize_key(value) when is_atom(value), do: Atom.to_string(value)
   defp normalize_key(value), do: to_string(value)

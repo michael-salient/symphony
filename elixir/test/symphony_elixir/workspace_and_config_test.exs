@@ -111,6 +111,30 @@ defmodule SymphonyElixir.WorkspaceAndConfigTest do
     end
   end
 
+  test "workspace repository config normalizes blank default URL and alias entries" do
+    write_workflow_file!(Workflow.workflow_file_path(),
+      workspace_repository_url: "   ",
+      workspace_repository_aliases: %{
+        " one-ui " => " git@github.com:your-org/one-ui.git "
+      }
+    )
+
+    settings = Config.settings!()
+
+    assert settings.workspace.repository_url == nil
+    assert settings.workspace.repository_aliases == %{"one-ui" => "git@github.com:your-org/one-ui.git"}
+  end
+
+  test "workspace repository aliases require non-empty URL values" do
+    write_workflow_file!(Workflow.workflow_file_path(),
+      workspace_repository_aliases: %{"one-ui" => " "}
+    )
+
+    assert {:error, {:invalid_workflow_config, message}} = Config.settings()
+    assert message =~ "workspace.repository_aliases"
+    assert message =~ "must map non-empty alias names to non-empty repository URLs"
+  end
+
   test "workspace rejects reused git checkout when target repository changes" do
     test_root =
       Path.join(
