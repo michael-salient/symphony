@@ -833,6 +833,147 @@ defmodule SymphonyElixir.CoreTest do
     assert PromptBuilder.build_prompt(issue) == "Ticket MT-701"
   end
 
+  test "prompt builder prepends a run capability summary when supplied" do
+    write_workflow_file!(Workflow.workflow_file_path(), prompt: "Ticket {{ issue.identifier }}")
+
+    issue = %Issue{
+      identifier: "MT-702",
+      title: "Capability prompt",
+      description: "Include runtime summary",
+      state: "In Progress",
+      url: "https://example.org/issues/MT-702",
+      labels: []
+    }
+
+    prompt =
+      PromptBuilder.build_prompt(issue,
+        run_capability_summary: "Run capability summary:\n\n- Local `.git` writes: available"
+      )
+
+    assert String.starts_with?(prompt, "Run capability summary:")
+    assert prompt =~ "- Local `.git` writes: available"
+    assert prompt =~ "\n\n---\n\nTicket MT-702"
+    assert PromptBuilder.build_prompt(issue, run_capability_summary: "  \n") == "Ticket MT-702"
+  end
+
+  test "run capabilities report git writes and declared browser/smooth expectations" do
+    test_root =
+      Path.join(
+        System.tmp_dir!(),
+        "symphony-elixir-run-capabilities-#{System.unique_integer([:positive])}"
+      )
+
+    previous_browser = System.get_env("SYMPHONY_AUTHENTICATED_BROWSER_CDP")
+    previous_browser_available = System.get_env("SYMPHONY_AUTHENTICATED_BROWSER_AVAILABLE")
+    previous_smooth = System.get_env("SYMPHONY_SMOOTH_TASK_LOGIN_PROFILE")
+
+    on_exit(fn ->
+      restore_env("SYMPHONY_AUTHENTICATED_BROWSER_CDP", previous_browser)
+      restore_env("SYMPHONY_AUTHENTICATED_BROWSER_AVAILABLE", previous_browser_available)
+      restore_env("SYMPHONY_SMOOTH_TASK_LOGIN_PROFILE", previous_smooth)
+    end)
+
+    try do
+      workspace = Path.join(test_root, "workspace")
+      git_dir = Path.join(workspace, ".git")
+
+      File.mkdir_p!(git_dir)
+      System.put_env("SYMPHONY_AUTHENTICATED_BROWSER_CDP", "available")
+      System.delete_env("SYMPHONY_AUTHENTICATED_BROWSER_AVAILABLE")
+      System.put_env("SYMPHONY_SMOOTH_TASK_LOGIN_PROFILE", "expected")
+      write_workflow_file!(Workflow.workflow_file_path())
+
+      summary = RunCapabilities.summary(workspace)
+
+      assert summary.git_writes.status == :available
+      assert summary.authenticated_browser_cdp.status == :available
+      assert summary.smooth_task_login_profile.status == :available
+      refute File.exists?(Path.join(git_dir, "index.lock"))
+
+      prompt = RunCapabilities.to_prompt(summary)
+      assert prompt =~ "Local `.git` writes: available"
+      assert prompt =~ "Authenticated browser/CDP session: available"
+      assert prompt =~ "`smooth_task` Oneleet/Sprinto login profile: available"
+    after
+      File.rm_rf(test_root)
+    end
+  end
+
+  test "run capabilities make missing git and undeclared browser/smooth status explicit" do
+    test_root =
+      Path.join(
+        System.tmp_dir!(),
+        "symphony-elixir-run-capabilities-missing-#{System.unique_integer([:positive])}"
+      )
+
+    previous_browser = System.get_env("SYMPHONY_AUTHENTICATED_BROWSER_CDP")
+    previous_browser_available = System.get_env("SYMPHONY_AUTHENTICATED_BROWSER_AVAILABLE")
+    previous_smooth = System.get_env("SYMPHONY_SMOOTH_TASK_LOGIN_PROFILE")
+
+    on_exit(fn ->
+      restore_env("SYMPHONY_AUTHENTICATED_BROWSER_CDP", previous_browser)
+      restore_env("SYMPHONY_AUTHENTICATED_BROWSER_AVAILABLE", previous_browser_available)
+      restore_env("SYMPHONY_SMOOTH_TASK_LOGIN_PROFILE", previous_smooth)
+    end)
+
+    try do
+      workspace = Path.join(test_root, "workspace")
+
+      File.mkdir_p!(workspace)
+      System.delete_env("SYMPHONY_AUTHENTICATED_BROWSER_CDP")
+      System.delete_env("SYMPHONY_AUTHENTICATED_BROWSER_AVAILABLE")
+      System.delete_env("SYMPHONY_SMOOTH_TASK_LOGIN_PROFILE")
+      write_workflow_file!(Workflow.workflow_file_path())
+
+      summary = RunCapabilities.summary(workspace)
+
+      assert summary.git_writes.status == :unavailable
+      assert summary.authenticated_browser_cdp.status == :unknown
+      assert summary.smooth_task_login_profile.status == :unknown
+
+      prompt = RunCapabilities.to_prompt(summary)
+      assert prompt =~ "Local `.git` writes: unavailable"
+      assert prompt =~ "Authenticated browser/CDP session: unknown"
+      assert prompt =~ "`smooth_task` Oneleet/Sprinto login profile: unknown"
+    after
+      File.rm_rf(test_root)
+    end
+  end
+
+  test "config resolves run capability declarations from workflow values and env references" do
+    browser_env = "SYMPHONY_TEST_BROWSER_CAPABILITY_#{System.unique_integer([:positive])}"
+    blank_env = "SYMPHONY_TEST_BLANK_CAPABILITY_#{System.unique_integer([:positive])}"
+    previous_browser = System.get_env(browser_env)
+    previous_blank = System.get_env(blank_env)
+
+    on_exit(fn ->
+      restore_env(browser_env, previous_browser)
+      restore_env(blank_env, previous_blank)
+    end)
+
+    System.put_env(browser_env, "available")
+
+    write_workflow_file!(Workflow.workflow_file_path(),
+      run_capabilities_authenticated_browser_cdp: "$#{browser_env}",
+      run_capabilities_smooth_task_login_profile: false
+    )
+
+    settings = Config.settings!()
+    assert settings.run_capabilities.authenticated_browser_cdp == "available"
+    assert settings.run_capabilities.smooth_task_login_profile == false
+
+    System.put_env(blank_env, "   ")
+
+    write_workflow_file!(Workflow.workflow_file_path(),
+      run_capabilities_authenticated_browser_cdp: "$#{blank_env}",
+      run_capabilities_smooth_task_login_profile: true
+    )
+
+    settings = Config.settings!()
+    assert is_nil(settings.run_capabilities.authenticated_browser_cdp)
+    assert settings.run_capabilities.smooth_task_login_profile == true
+  end
+
   test "prompt builder uses strict variable rendering" do
     workflow_prompt = "Work on ticket {{ missing.ticket_id }} and follow these steps."
 
@@ -1355,7 +1496,10 @@ defmodule SymphonyElixir.CoreTest do
         end)
 
       assert length(turn_texts) == 2
+      assert Enum.at(turn_texts, 0) =~ "Run capability summary:"
+      assert Enum.at(turn_texts, 0) =~ "Local `.git` writes:"
       assert Enum.at(turn_texts, 0) =~ "You are an agent for this repository."
+      refute Enum.at(turn_texts, 1) =~ "Run capability summary:"
       refute Enum.at(turn_texts, 1) =~ "You are an agent for this repository."
       assert Enum.at(turn_texts, 1) =~ "Continuation guidance:"
       assert Enum.at(turn_texts, 1) =~ "continuation turn #2 of 3"

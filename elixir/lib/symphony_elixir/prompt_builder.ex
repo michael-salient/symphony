@@ -23,6 +23,7 @@ defmodule SymphonyElixir.PromptBuilder do
       @render_opts
     )
     |> IO.iodata_to_binary()
+    |> prepend_run_capability_summary(Keyword.get(opts, :run_capability_summary))
   end
 
   defp prompt_template!({:ok, %{prompt_template: prompt}}), do: default_prompt(prompt)
@@ -61,4 +62,13 @@ defmodule SymphonyElixir.PromptBuilder do
       prompt
     end
   end
+
+  defp prepend_run_capability_summary(prompt, summary) when is_binary(summary) do
+    case String.trim(summary) do
+      "" -> prompt
+      trimmed -> trimmed <> "\n\n---\n\n" <> prompt
+    end
+  end
+
+  defp prepend_run_capability_summary(prompt, _summary), do: prompt
 end

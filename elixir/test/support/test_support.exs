@@ -15,6 +15,7 @@ defmodule SymphonyElixir.TestSupport do
       alias SymphonyElixir.Linear.Issue
       alias SymphonyElixir.Orchestrator
       alias SymphonyElixir.PromptBuilder
+      alias SymphonyElixir.RunCapabilities
       alias SymphonyElixir.StatusDashboard
       alias SymphonyElixir.Tracker
       alias SymphonyElixir.Workflow
@@ -103,6 +104,8 @@ defmodule SymphonyElixir.TestSupport do
           workspace_root: Path.join(System.tmp_dir!(), "symphony_workspaces"),
           worker_ssh_hosts: [],
           worker_max_concurrent_agents_per_host: nil,
+          run_capabilities_authenticated_browser_cdp: nil,
+          run_capabilities_smooth_task_login_profile: nil,
           max_concurrent_agents: 10,
           max_turns: 20,
           max_retry_backoff_ms: 300_000,
@@ -140,6 +143,8 @@ defmodule SymphonyElixir.TestSupport do
     workspace_root = Keyword.get(config, :workspace_root)
     worker_ssh_hosts = Keyword.get(config, :worker_ssh_hosts)
     worker_max_concurrent_agents_per_host = Keyword.get(config, :worker_max_concurrent_agents_per_host)
+    run_capabilities_authenticated_browser_cdp = Keyword.get(config, :run_capabilities_authenticated_browser_cdp)
+    run_capabilities_smooth_task_login_profile = Keyword.get(config, :run_capabilities_smooth_task_login_profile)
     max_concurrent_agents = Keyword.get(config, :max_concurrent_agents)
     max_turns = Keyword.get(config, :max_turns)
     max_retry_backoff_ms = Keyword.get(config, :max_retry_backoff_ms)
@@ -179,6 +184,7 @@ defmodule SymphonyElixir.TestSupport do
         "workspace:",
         "  root: #{yaml_value(workspace_root)}",
         worker_yaml(worker_ssh_hosts, worker_max_concurrent_agents_per_host),
+        run_capabilities_yaml(run_capabilities_authenticated_browser_cdp, run_capabilities_smooth_task_login_profile),
         "agent:",
         "  max_concurrent_agents: #{yaml_value(max_concurrent_agents)}",
         "  max_turns: #{yaml_value(max_turns)}",
@@ -252,6 +258,19 @@ defmodule SymphonyElixir.TestSupport do
         "  max_concurrent_agents_per_host: #{yaml_value(max_concurrent_agents_per_host)}"
     ]
     |> Enum.reject(&(&1 in [nil, false]))
+    |> Enum.join("\n")
+  end
+
+  defp run_capabilities_yaml(authenticated_browser_cdp, smooth_task_login_profile)
+       when is_nil(authenticated_browser_cdp) and is_nil(smooth_task_login_profile),
+       do: nil
+
+  defp run_capabilities_yaml(authenticated_browser_cdp, smooth_task_login_profile) do
+    [
+      "run_capabilities:",
+      "  authenticated_browser_cdp: #{yaml_value(authenticated_browser_cdp)}",
+      "  smooth_task_login_profile: #{yaml_value(smooth_task_login_profile)}"
+    ]
     |> Enum.join("\n")
   end
 
