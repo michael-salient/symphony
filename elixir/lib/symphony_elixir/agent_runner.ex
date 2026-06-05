@@ -5,7 +5,7 @@ defmodule SymphonyElixir.AgentRunner do
 
   require Logger
   alias SymphonyElixir.Codex.AppServer
-  alias SymphonyElixir.{Config, Linear.Issue, PromptBuilder, Tracker, Workspace}
+  alias SymphonyElixir.{Config, Linear.Issue, PromptBuilder, RunCapabilities, Tracker, Workspace}
 
   @type worker_host :: String.t() | nil
 
@@ -82,15 +82,35 @@ defmodule SymphonyElixir.AgentRunner do
 
     with {:ok, session} <- AppServer.start_session(workspace, worker_host: worker_host) do
       try do
-        do_run_codex_turns(session, workspace, issue, codex_update_recipient, opts, issue_state_fetcher, 1, max_turns)
+        turn_opts = Keyword.put(opts, :worker_host, worker_host)
+
+        do_run_codex_turns(
+          session,
+          workspace,
+          issue,
+          codex_update_recipient,
+          turn_opts,
+          issue_state_fetcher,
+          1,
+          max_turns
+        )
       after
         AppServer.stop_session(session)
       end
     end
   end
 
-  defp do_run_codex_turns(app_session, workspace, issue, codex_update_recipient, opts, issue_state_fetcher, turn_number, max_turns) do
-    prompt = build_turn_prompt(issue, opts, turn_number, max_turns)
+  defp do_run_codex_turns(
+         app_session,
+         workspace,
+         issue,
+         codex_update_recipient,
+         opts,
+         issue_state_fetcher,
+         turn_number,
+         max_turns
+       ) do
+    prompt = build_turn_prompt(issue, opts, turn_number, max_turns, workspace)
 
     with {:ok, turn_session} <-
            AppServer.run_turn(
@@ -130,9 +150,17 @@ defmodule SymphonyElixir.AgentRunner do
     end
   end
 
-  defp build_turn_prompt(issue, opts, 1, _max_turns), do: PromptBuilder.build_prompt(issue, opts)
+  defp build_turn_prompt(issue, opts, 1, _max_turns, workspace) do
+    run_capability_summary =
+      opts
+      |> Keyword.get(:run_capability_summary)
+      |> default_run_capability_summary(workspace, Keyword.get(opts, :worker_host))
 
-  defp build_turn_prompt(_issue, _opts, turn_number, max_turns) do
+    issue
+    |> PromptBuilder.build_prompt(Keyword.put(opts, :run_capability_summary, run_capability_summary))
+  end
+
+  defp build_turn_prompt(_issue, _opts, turn_number, max_turns, _workspace) do
     """
     Continuation guidance:
 
@@ -143,6 +171,14 @@ defmodule SymphonyElixir.AgentRunner do
     - Focus on the remaining ticket work and do not end the turn while the issue stays active unless you are truly blocked.
     """
   end
+
+  defp default_run_capability_summary(nil, workspace, worker_host) do
+    workspace
+    |> RunCapabilities.summary(worker_host: worker_host)
+    |> RunCapabilities.to_prompt()
+  end
+
+  defp default_run_capability_summary(summary, _workspace, _worker_host), do: summary
 
   defp continue_with_issue?(%Issue{id: issue_id} = issue, issue_state_fetcher) when is_binary(issue_id) do
     case issue_state_fetcher.([issue_id]) do

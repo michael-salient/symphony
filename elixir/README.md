@@ -127,6 +127,18 @@ Notes:
 - Workflows that run package managers or other commands that resolve external hosts should set
   `networkAccess: true` in `codex.turn_sandbox_policy`; otherwise DNS/network access may be denied
   by the Codex turn sandbox.
+- At the start of the first Codex turn, Symphony prepends a run capability summary to the prompt.
+  It probes whether the issue workspace can create and remove `.git/index.lock`, and it reports
+  declared browser/smooth expectations from `run_capabilities` or the matching environment
+  variables. Supported declaration values are `available`, `unavailable`, `unknown`, `true`, and
+  `false`.
+
+```yaml
+run_capabilities:
+  authenticated_browser_cdp: $SYMPHONY_AUTHENTICATED_BROWSER_CDP
+  smooth_task_login_profile: $SYMPHONY_SMOOTH_TASK_LOGIN_PROFILE
+```
+
 - `agent.max_turns` caps how many back-to-back Codex turns Symphony will run in a single agent
   invocation when a turn completes normally but the issue is still in an active state. Default: `20`.
 - If the Markdown body is blank, Symphony uses a default prompt template that includes the issue

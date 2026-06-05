@@ -37,6 +37,32 @@ defmodule SymphonyElixir.Config.Schema do
     def dump(_value), do: :error
   end
 
+  defmodule StringOrBoolean do
+    @moduledoc false
+    @behaviour Ecto.Type
+
+    @spec type() :: :string
+    def type, do: :string
+
+    @spec embed_as(term()) :: :self
+    def embed_as(_format), do: :self
+
+    @spec equal?(term(), term()) :: boolean()
+    def equal?(left, right), do: left == right
+
+    @spec cast(term()) :: {:ok, String.t() | boolean()} | :error
+    def cast(value) when is_binary(value) or is_boolean(value), do: {:ok, value}
+    def cast(_value), do: :error
+
+    @spec load(term()) :: {:ok, String.t() | boolean()} | :error
+    def load(value) when is_binary(value) or is_boolean(value), do: {:ok, value}
+    def load(_value), do: :error
+
+    @spec dump(term()) :: {:ok, String.t() | boolean()} | :error
+    def dump(value) when is_binary(value) or is_boolean(value), do: {:ok, value}
+    def dump(_value), do: :error
+  end
+
   defmodule Tracker do
     @moduledoc false
     use Ecto.Schema
@@ -116,6 +142,26 @@ defmodule SymphonyElixir.Config.Schema do
       schema
       |> cast(attrs, [:ssh_hosts, :max_concurrent_agents_per_host], empty_values: [])
       |> validate_number(:max_concurrent_agents_per_host, greater_than: 0)
+    end
+  end
+
+  defmodule RunCapabilities do
+    @moduledoc false
+    use Ecto.Schema
+    import Ecto.Changeset
+
+    alias SymphonyElixir.Config.Schema.StringOrBoolean
+
+    @primary_key false
+    embedded_schema do
+      field(:authenticated_browser_cdp, StringOrBoolean)
+      field(:smooth_task_login_profile, StringOrBoolean)
+    end
+
+    @spec changeset(%__MODULE__{}, map()) :: Ecto.Changeset.t()
+    def changeset(schema, attrs) do
+      schema
+      |> cast(attrs, [:authenticated_browser_cdp, :smooth_task_login_profile], empty_values: [])
     end
   end
 
@@ -266,6 +312,7 @@ defmodule SymphonyElixir.Config.Schema do
     embeds_one(:polling, Polling, on_replace: :update, defaults_to_struct: true)
     embeds_one(:workspace, Workspace, on_replace: :update, defaults_to_struct: true)
     embeds_one(:worker, Worker, on_replace: :update, defaults_to_struct: true)
+    embeds_one(:run_capabilities, RunCapabilities, on_replace: :update, defaults_to_struct: true)
     embeds_one(:agent, Agent, on_replace: :update, defaults_to_struct: true)
     embeds_one(:codex, Codex, on_replace: :update, defaults_to_struct: true)
     embeds_one(:hooks, Hooks, on_replace: :update, defaults_to_struct: true)
@@ -358,6 +405,7 @@ defmodule SymphonyElixir.Config.Schema do
     |> cast_embed(:polling, with: &Polling.changeset/2)
     |> cast_embed(:workspace, with: &Workspace.changeset/2)
     |> cast_embed(:worker, with: &Worker.changeset/2)
+    |> cast_embed(:run_capabilities, with: &RunCapabilities.changeset/2)
     |> cast_embed(:agent, with: &Agent.changeset/2)
     |> cast_embed(:codex, with: &Codex.changeset/2)
     |> cast_embed(:hooks, with: &Hooks.changeset/2)
@@ -383,7 +431,21 @@ defmodule SymphonyElixir.Config.Schema do
         turn_sandbox_policy: normalize_optional_map(settings.codex.turn_sandbox_policy)
     }
 
-    %{settings | tracker: tracker, workspace: workspace, codex: codex}
+    run_capabilities = %{
+      settings.run_capabilities
+      | authenticated_browser_cdp:
+          resolve_capability_setting(
+            settings.run_capabilities.authenticated_browser_cdp,
+            first_env(["SYMPHONY_AUTHENTICATED_BROWSER_CDP", "SYMPHONY_AUTHENTICATED_BROWSER_AVAILABLE"])
+          ),
+        smooth_task_login_profile:
+          resolve_capability_setting(
+            settings.run_capabilities.smooth_task_login_profile,
+            first_env(["SYMPHONY_SMOOTH_TASK_LOGIN_PROFILE"])
+          )
+    }
+
+    %{settings | tracker: tracker, workspace: workspace, codex: codex, run_capabilities: run_capabilities}
   end
 
   defp normalize_keys(value) when is_map(value) do
@@ -433,6 +495,34 @@ defmodule SymphonyElixir.Config.Schema do
       path ->
         path
     end
+  end
+
+  defp resolve_capability_setting(nil, fallback), do: normalize_capability_value(fallback)
+
+  defp resolve_capability_setting(value, fallback) when is_binary(value) do
+    value
+    |> resolve_env_value(fallback)
+    |> normalize_capability_value()
+  end
+
+  defp resolve_capability_setting(value, _fallback) when is_boolean(value), do: value
+
+  defp normalize_capability_value(value) when is_binary(value) do
+    case String.trim(value) do
+      "" -> nil
+      trimmed -> trimmed
+    end
+  end
+
+  defp normalize_capability_value(_value), do: nil
+
+  defp first_env(names) when is_list(names) do
+    Enum.find_value(names, fn name ->
+      case System.get_env(name) do
+        value when is_binary(value) and value != "" -> value
+        _ -> nil
+      end
+    end)
   end
 
   defp resolve_env_value(value, fallback) when is_binary(value) do
